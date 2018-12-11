@@ -3,7 +3,7 @@
     <h1>{{ title }}</h1>
     <p>{{ mainText }}</p>
     <div class="index">
-        <a href="#" class="add-button btn-floating btn-large halfway-fab blue-grey darken-1">
+        <a href="#" class="add-button btn-floating btn-large halfway-fab blue-grey darken-1" @click="addUser()">
           <router-link to="">
             <i class="material-icons">add</i>
           </router-link>
@@ -51,6 +51,14 @@ export default {
       this.users = this.users.filter( user => {
           return user.id != og      
       })
+    },
+    
+    addUser() {
+      let newUser = { firstName: "", lastName: "", id: "10", img: "" }
+      // this.users = this.users.push("Vlada")
+      // console.log("Sta ima?")
+      // console.log(this.users.length)
+      this.users.push(newUser)
     }
   }
 }

@@ -26,8 +26,12 @@ export default {
 
 nav {
     top: 0;
+    height: 5em;    
+}
+media screen and (min-width: 768px) {
+  nav {
     height: 10em;
-    
+  }
 }
 .logo {
     float: left;
