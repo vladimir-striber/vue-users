@@ -20,6 +20,12 @@ export default {
 <style>
   /* @import './assets/fonts/fonts.css'; */
 
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
 html {
   line-height: 100px;
 }

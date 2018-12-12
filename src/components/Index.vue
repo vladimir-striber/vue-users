@@ -55,9 +55,6 @@ export default {
     
     addUser() {
       let newUser = { firstName: "", lastName: "", id: "10", img: "" }
-      // this.users = this.users.push("Vlada")
-      // console.log("Sta ima?")
-      // console.log(this.users.length)
       this.users.push(newUser)
     }
   }
@@ -67,16 +64,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-
   .main-content {
     width: 80%;
     margin: 0 auto;
     padding-top: 100px;
-  }
-    @media screen and (min-width: 768px) {
-    .main-content {
-      width: 50%;
-    }
   }
   .main-content p {
     font-size: 16px;
@@ -84,13 +75,11 @@ export default {
     letter-spacing: 1.5px;
     width: 80%;
     margin: 0 auto;
-  }
-
-  
+  }  
   .index {
     display: grid;
     display: -ms-grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     -ms-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-gap: 30px;
     margin: 60px 0;
@@ -98,7 +87,7 @@ export default {
   .card {
     background:  #e9e9e9;
     -webkit-box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
-            box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
@@ -106,11 +95,14 @@ export default {
   }
   .card:hover {
     -webkit-box-shadow: 10px 10px 25px rgba(73, 78, 92, 0.15);
-            box-shadow: 10px 10px 25px rgba(73, 78, 92, 0.15);
+    box-shadow: 10px 10px 25px rgba(73, 78, 92, 0.15);
     -ms-transform: translateY(-5px);
-        transform: translateY(-5px);
+    transform: translateY(-5px);
     -webkit-transform: translateY(-5px);
     -moz-transform: translateY(-5px);
+  }
+  .card-content {
+    padding: 22px 22px 0;
   }
   .card-content i {
     float: right;
@@ -122,7 +114,7 @@ export default {
   }
   .card-content img {
     -webkit-filter: brightness(80%);
-            filter: brightness(80%);
+    filter: brightness(80%);
   }
   .add-button {
     position: fixed;

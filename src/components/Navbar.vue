@@ -51,6 +51,7 @@ export default {
   height: 55px;
   position: fixed;
   top: 0;
+  z-index: 20;
 }
 .mobileMenu {
   display: block;
