@@ -17,8 +17,9 @@ export default {
   }
 }
 </script>
+<style>
+  /* @import './assets/fonts/fonts.css'; */
 
-<style>‚
 html {
   line-height: 100px;
 }

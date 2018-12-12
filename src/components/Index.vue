@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container main-content">
     <h1>{{ title }}</h1>
     <p>{{ mainText }}</p>
     <div class="index">
@@ -68,13 +68,17 @@ export default {
 <style scoped>
 
 
-
+  .main-content {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 100px;
+  }
     @media screen and (min-width: 768px) {
-    .container {
+    .main-content {
       width: 50%;
     }
   }
-  .container p {
+  .main-content p {
     font-size: 16px;
     line-height: 28px;
     letter-spacing: 1.5px;
@@ -85,6 +89,7 @@ export default {
   
   .index {
     display: grid;
+    display: -ms-grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     -ms-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-gap: 30px;
@@ -92,13 +97,18 @@ export default {
   }
   .card {
     background:  #e9e9e9;
-    box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    -webkit-box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+            box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
     transition: 0.4s;
     padding-bottom: 25px;
   }
   .card:hover {
-    box-shadow: 10px 10px 25px rgba(73, 78, 92, 0.15);
-    transform: translateY(-5px);
+    -webkit-box-shadow: 10px 10px 25px rgba(73, 78, 92, 0.15);
+            box-shadow: 10px 10px 25px rgba(73, 78, 92, 0.15);
+    -ms-transform: translateY(-5px);
+        transform: translateY(-5px);
     -webkit-transform: translateY(-5px);
     -moz-transform: translateY(-5px);
   }
@@ -111,7 +121,8 @@ export default {
     width: 100%;
   }
   .card-content img {
-    filter: brightness(80%);
+    -webkit-filter: brightness(80%);
+            filter: brightness(80%);
   }
   .add-button {
     position: fixed;
