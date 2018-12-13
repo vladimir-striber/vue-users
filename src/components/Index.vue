@@ -1,22 +1,25 @@
 <template>
-  <div class="container main-content">
-    <h1>{{ title }}</h1>
-    <p>{{ mainText }}</p>
-    <div class="index">
-        <a href="#" class="add-button btn-floating btn-large halfway-fab blue-grey darken-1" @click="addUser()">
-          <router-link to="">
-            <i class="material-icons">add</i>
-          </router-link>
-        </a>
-      <div class="card" v-for="user in users" :key="user.id">
-        <div class="card-content">
-          <!-- <i class="material-icons">delete</i> -->
-          <p class="darken-4-text center-align">{{ user.firstName }}</p>
-          <p class="darken-4-text center-align">{{ user.lastName }}</p>
-          <img v-bind:src="user.img" alt="">
+  <div class="container mainContent">
+    <div class="hero-section">
+      <h1>{{ title }}</h1>
+      <p>{{ mainText }}</p>
+    </div>
+    <a href="#" class="addButton btn-floating btn-large halfway-fab blue-grey darken-1">
+      <router-link :to="{ name: 'AddUser' }">
+        <i class="material-icons">add</i>
+      </router-link>
+    </a>
+    <div class="row">
+      <div class="col s12 m6 l4" v-for="user in users" :key="user.id">
+        <div class="card">
+          <div class="cardContent">
+            <p class="darken-4-text center-align">{{ user.firstName }}</p>
+            <p class="darken-4-text center-align">{{ user.lastName }}</p>
+            <img v-bind:src="user.img" alt="">
+          </div>
+          <button class="editButton btn-flat">Edit</button>
+          <button class="deleteButton btn-flat" @click="deleteUser(user.id)">Delete</button>
         </div>
-        <button class="edit-button btn-flat">Edit</button>
-        <button class="delete-button btn-flat" @click="deleteUser(user.id)">Delete</button>
       </div>
     </div>
   </div>
@@ -32,16 +35,16 @@ export default {
       mainText: "Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be? He's the exact opposite of the hero. And most times they're friends, like you and me! I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass.",      
       users: [
           // This is just a dummy data
-        { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg" },
-        { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg" },
-        { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg" },
-        { firstName: "Denzel", lastName: "Washington", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjE5NDU2Mzc3MV5BMl5BanBnXkFtZTcwNjAwNTE5OQ@@._V1_UY317_CR12,0,214,317_AL_.jpg" },
-        { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg" },
-        { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg" },
+        { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas" },
+        { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro" },
+        { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt" },
+        { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney" },
+        { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino" },
+        { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen" },
        
-        { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg" },
-         { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg" },
-        { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg" }
+        { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver" },
+         { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson" },
+        { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider" }
 
       ]
     }
@@ -64,25 +67,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-  .main-content {
+  .mainContent {
     width: 80%;
     margin: 0 auto;
     padding-top: 100px;
+    padding-bottom: 200px;
+    min-height: calc(100vh - 156px);
   }
-  .main-content p {
+  .mainContent p {
     font-size: 16px;
     line-height: 28px;
     letter-spacing: 1.5px;
     width: 80%;
     margin: 0 auto;
   }  
-  .index {
-    display: grid;
-    display: -ms-grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    -ms-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    grid-gap: 30px;
-    margin: 60px 0;
+  .hero-section {
+    margin-bottom: 100px;
   }
   .card {
     background:  #e9e9e9;
@@ -101,30 +101,37 @@ export default {
     -webkit-transform: translateY(-5px);
     -moz-transform: translateY(-5px);
   }
-  .card-content {
+  .cardContent {
     padding: 22px 22px 0;
+    height: 400px;
   }
-  .card-content i {
+  .cardContent i {
     float: right;
   }
-  .card-content p {
+  .cardContent p {
     margin: 15px 0;
     font-size: 40px;
     width: 100%;
   }
-  .card-content img {
+  .cardContent p:nth-child(2) {
+    margin-bottom: 30px;
+  }
+  .cardContent img {
     -webkit-filter: brightness(80%);
     filter: brightness(80%);
+    width: 180px;
   }
-  .add-button {
+
+  .addButton {
     position: fixed;
     top: 250px;
     right: 30px;
+    z-index: 100;
   }
-  .edit-button {
+  .editButton {
     background:  #c1c1c1 ;
   }
-  .delete-button {
+  .deleteButton {
     background:  #de8080 ;
   }
 

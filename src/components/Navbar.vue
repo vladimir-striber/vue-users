@@ -5,10 +5,19 @@
         </div>   
         <div class="topNav__content">
           <a href="#">
-            <router-link to="">              
+            <router-link :to="{ name: 'Index' }">              
                 <img src="@/assets/images/showaround_logo.png" alt="" class="topNav__logo">             
             </router-link>
           </a>
+          <div class="location">
+            <i class="material-icons prefix">location_searching</i>
+            <span class="imput-field">              
+              <input placeholder="Where next?" id="location" type="text" class="validate">
+            </span>
+          </div>
+          <div class="mobileMenu">
+            <i class="material-icons">dehaze</i>  
+          </div>
           <div class="topNav__group">
           <ul>
             <li>
@@ -24,7 +33,6 @@
           <div class="topNav__btn">        
             <a href="#" class="primaryBtn topNav__btn--connect">Connect</a>
             <a href="#" class="primaryBtn topNav__btn--signUp">Sign up as a local</a>
-            <!-- </div> -->
           </div>
           </div>
         </div>   
@@ -42,10 +50,10 @@ export default {
 }
 </script>
 
-
 <style scoped>
-
-
+nav ul a:hover {
+  background-color: none;
+}
 .topNav {
   background: #eee;
   height: 55px;
@@ -56,7 +64,7 @@ export default {
 .mobileMenu {
   display: block;
   float: left;
-  width: 40px;	
+  width: 0;	
   margin: 0 15px;
   color:#888;
 }
@@ -81,6 +89,32 @@ export default {
     justify-content: space-between;
   }
 }
+.location {
+  display: flex;
+  height: 56px;
+  line-height: 56px;  
+}
+.location i {
+  margin: 0 10px;
+  color: #888;
+}
+.location input, 
+.location input:focus:not([readonly]) {
+  border-bottom: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .topNav__content .mobileMenu {
+    display: block;
+    margin-right: 5px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .topNav__content .mobileMenu {
+    display: none;
+  }
+}
 .topNav__content ul li a {
   padding: 0 10px;
   color: #888;
@@ -88,11 +122,21 @@ export default {
   font-size: 14px;
 }
 .topNav__content ul li a:hover {
-  color: #323337;
+  color: #444;
 }
 .topNav__content ul {
   height: 40px;
   line-height: 40px;
+}
+@media screen and (min-width: 768px) {
+  .topNav__content ul {
+    display: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .topNav__content ul {
+    display: block;
+  }
 }
 .topNav__logo {
   float: left;
@@ -141,6 +185,4 @@ export default {
   background: #e36b0d;
   border-color: #e36b0d;
 }
-
-
 </style>

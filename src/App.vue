@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />    
+    <Navbar />  
+    <Hero />  
     <router-view/>
     <Footer />
   </div>
@@ -8,17 +9,19 @@
 
 <script>
 import Navbar from "@/components/Navbar"
+import Hero from "@/components/Hero"
 import Footer from "@/components/Footer"
 export default {
   name: 'App',
   components: {
     Navbar,
+    Hero,
     Footer
   }
 }
 </script>
+
 <style>
-  /* @import './assets/fonts/fonts.css'; */
 
 *,
 *::before,
@@ -26,8 +29,9 @@ export default {
 box-sizing: border-box;
 }
 
-html {
-  line-height: 100px;
+body {
+  font-size: 14px;
+  font-family: 'Cabin','Helvetica Neue','Calibri Light','Roboto','sans-serif';
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
