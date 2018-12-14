@@ -3,7 +3,7 @@
    <Hero />  
 <div class="container mainContent">
     <p>Showaround locals can tailor your activities and give you an insider's view on where to go and what to see</p>
-    <a href="#" class="addButton btn-floating btn-large halfway-fab">
+    <a href="#" id="addBtn" class="addButton btn-floating btn-large halfway-fab" @scroll="scrollFunction">
       <router-link :to="{ name: 'AddUser' }">
         <i class="material-icons">add</i>
       </router-link>
@@ -12,11 +12,14 @@
       <div class="col s12 m6 l4" v-for="user in users" :key="user.id">
         <div class="card">
           <div class="cardContent">
-            <p class="darken-4-text center-align">{{ user.firstName }}</p>
-            <p class="darken-4-text center-align">{{ user.lastName }}</p>
+            <input v-if="user.edit" v-model="user.firstName" class="darken-4-text center-align">
+            <label v-else> {{ user.firstName }} </label>
+            <input v-if="user.edit" v-model="user.lastName" class="darken-4-text center-align">
+            <p v-else class="darken-4-text center-align">{{ user.lastName }}</p>
             <img v-bind:src="user.img" alt="">
           </div>
-          <button class="editButton btn-flat">Edit</button>
+          <button v-if="user.edit" class="editButton btn-flat" @click = "user.edit = false;">Ok</button>
+          <button v-else class="editButton btn-flat" @click = "user.edit = true;">Edit</button>
           <button class="deleteButton btn-flat" @click="deleteUser(user.id)">Delete</button>
         </div>
       </div>
@@ -36,32 +39,35 @@ export default {
     return {
       users: [
           // This is just a dummy data
-        { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas" },
-        { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro" },
-        { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt" },
-        { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney" },
-        { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino" },
-        { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen" },
-       
-        { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver" },
-         { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson" },
-        { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider" }
+        { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas", edit: false },
+        { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro", edit: false },
+        { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt", edit: false },
+        { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney", edit: false },
+        { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino", edit: false },
+        { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen", edit: false },       
+        { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver", edit: false },
+         { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson", edit: false },
+        { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider", edit: false }
 
-      ]
+      ],
+      editedUser: null
     }
   },
-  methods: {
-    deleteUser(og) {
-      this.users = this.users.filter( user => {
-          return user.id != og      
-      })
-    },    
-    addUser() {
-      let newUser = { firstName: "", lastName: "", id: "10", img: "" }
-      this.users.push(newUser)
+    methods: {
+      deleteUser(og) {
+        this.users = this.users.filter( user => {
+            return user.id != og      
+        })
+      },
+      editUser: function(user) {
+        this.editedUser = user
+      },
+      scrollFunction () {
+        console.log(200)
+      }
     }
   }
-}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
