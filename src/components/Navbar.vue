@@ -27,7 +27,7 @@
               <a href="">Blog</a>              
             </li>
             <li>
-              <a href="">About Us</a>              
+              <a href="">About us</a>              
             </li>
           </ul>  
           <div class="topNav__btn">        
@@ -167,6 +167,9 @@ nav ul a:hover {
   border: 2px solid #888;  
   margin: 0 10px;
   color: #888;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 .topNav__btn--connect:hover {
   background: #888;
@@ -178,8 +181,10 @@ nav ul a:hover {
   line-height: 28px;
   background: #f38630;
   border: 2px solid #f38630;
-  border-radius: 2px;
   color: #eee;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 .topNav__btn--signUp:hover {
   background: #e36b0d;

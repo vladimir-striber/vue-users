@@ -3,8 +3,9 @@
   <h2>Create new user</h2>
   <form @click.prevent="user">
     <div class="createUserInput field title">
-      <label for="name">User name</label>
-      <input type="text" name="name" v-model="name">
+      <label for="name">Full name</label>
+      <input type="text" name="name" class="validate" v-model="name">
+      
     </div>
     <div class="addImg">
       <p>Drag and drop image</p>
@@ -54,7 +55,7 @@ export default {
   .mainContent {
     width: 80%;
     margin: 60px auto;
-    padding-top: 100px;
+    /* padding-top: 20px; */
     max-width: 500px;
     padding-bottom: 100px;
   }

@@ -12,7 +12,8 @@
   "dependencies": {
     "font-proxima-nova": "^1.0.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-scroll-reveal": "^1.0.11"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

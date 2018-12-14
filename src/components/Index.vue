@@ -1,7 +1,9 @@
 <template>
-  <div class="container mainContent">
+<div>
+   <Hero />  
+<div class="container mainContent">
     <p>Showaround locals can tailor your activities and give you an insider's view on where to go and what to see</p>
-    <a href="#" class="addButton btn-floating btn-large halfway-fab blue-grey darken-1">
+    <a href="#" class="addButton btn-floating btn-large halfway-fab">
       <router-link :to="{ name: 'AddUser' }">
         <i class="material-icons">add</i>
       </router-link>
@@ -20,12 +22,16 @@
       </div>
     </div>
   </div>
- 
+</div>
 </template>
 
 <script>
+import Hero from "@/components/Hero"
 export default {
   name: 'Index',
+  components: {
+    Hero
+  },
   data () {
     return {
       users: [
@@ -49,8 +55,7 @@ export default {
       this.users = this.users.filter( user => {
           return user.id != og      
       })
-    },
-    
+    },    
     addUser() {
       let newUser = { firstName: "", lastName: "", id: "10", img: "" }
       this.users.push(newUser)
@@ -65,10 +70,11 @@ export default {
   .mainContent {
     width: 80%;
     margin: 0 auto;
-    padding-top: 100px;
+    padding-top: 30px;
     padding-bottom: 200px;
     min-height: calc(100vh - 156px);
   }
+ 
   .mainContent p {
     font-size: 16px;
     line-height: 28px;
@@ -76,8 +82,10 @@ export default {
     width: 80%;
     margin: 0 auto;
   }  
-  .hero-section {
-    margin-bottom: 100px;
+    .mainContent > p {
+    font-weight: 600;
+    color: #323337;
+    margin-bottom: 20px;
   }
   .card {
     background:  #e9e9e9;
@@ -122,6 +130,11 @@ export default {
     top: 250px;
     right: 30px;
     z-index: 100;
+    background:  #546e7a ;
+    transition: ease-in-out 0.2s;
+  }
+  .addButton:hover {
+    background:  #487e85 ;
   }
   .editButton {
     background:  #c1c1c1 ;
