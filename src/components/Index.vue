@@ -1,9 +1,6 @@
 <template>
   <div class="container mainContent">
-    <div class="hero-section">
-      <h1>{{ title }}</h1>
-      <p>{{ mainText }}</p>
-    </div>
+    <p>Showaround locals can tailor your activities and give you an insider's view on where to go and what to see</p>
     <a href="#" class="addButton btn-floating btn-large halfway-fab blue-grey darken-1">
       <router-link :to="{ name: 'AddUser' }">
         <i class="material-icons">add</i>
@@ -31,8 +28,6 @@ export default {
   name: 'Index',
   data () {
     return {
-      title: "Vue Actors",
-      mainText: "Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be? He's the exact opposite of the hero. And most times they're friends, like you and me! I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass.",      
       users: [
           // This is just a dummy data
         { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas" },
@@ -103,7 +98,7 @@ export default {
   }
   .cardContent {
     padding: 22px 22px 0;
-    height: 400px;
+    height: 435px;
   }
   .cardContent i {
     float: right;
