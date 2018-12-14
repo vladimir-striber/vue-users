@@ -56,7 +56,7 @@ nav ul a:hover {
 }
 .topNav {
   background: #eee;
-  height: 55px;
+  height: 60px;
   position: fixed;
   top: 0;
   z-index: 20;
@@ -91,8 +91,8 @@ nav ul a:hover {
 }
 .location {
   display: flex;
-  height: 56px;
-  line-height: 56px;  
+  height: 60px;
+  line-height: 60px;  
 }
 .location i {
   margin: 0 10px;
@@ -145,11 +145,11 @@ nav ul a:hover {
 }
 .topNav__group {
   display: flex;
-  padding: 8px;
+  padding: 9px;
 }
 .topNav__btn {
   display: flex;
-  margin: 3px 0 0 10px ;
+  margin: 5px 0;
   height: 32px;
 }
 .primaryBtn {

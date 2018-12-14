@@ -15,7 +15,7 @@
             <input v-if="user.edit" v-model="user.firstName" class="darken-4-text center-align">
             <label v-else> {{ user.firstName }} </label>
             <input v-if="user.edit" v-model="user.lastName" class="darken-4-text center-align">
-            <p v-else class="darken-4-text center-align">{{ user.lastName }}</p>
+            <label v-else class="darken-4-text center-align">{{ user.lastName }}</label>
             <img v-bind:src="user.img" alt="">
           </div>
           <button v-if="user.edit" class="editButton btn-flat" @click = "user.edit = false;">Ok</button>
