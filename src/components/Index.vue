@@ -12,10 +12,12 @@
       <div class="col s12 m6 l4" v-for="user in users" :key="user.id">
         <div class="card">
           <div class="cardContent">
-            <input v-if="user.edit" v-model="user.firstName" class="darken-4-text center-align">
-            <label v-else> {{ user.firstName }} </label>
-            <input v-if="user.edit" v-model="user.lastName" class="darken-4-text center-align">
-            <label v-else class="darken-4-text center-align">{{ user.lastName }}</label>
+            <div class="userTitle">
+              <input v-if="user.edit" v-model="user.firstName" placeholder="First name" class="darken-4-text center-align">
+              <p v-else> {{ user.firstName }} </p>
+              <input v-if="user.edit" v-model="user.lastName" class="darken-4-text center-align">
+              <p v-else class="darken-4-text center-align">{{ user.lastName }}</p>
+            </div>
             <img v-bind:src="user.img" alt="">
           </div>
           <button v-if="user.edit" class="editButton btn-flat" @click = "user.edit = false;">Ok</button>
@@ -55,9 +57,12 @@ export default {
   },
     methods: {
       deleteUser(og) {
+        alert("Do you realy want to delete user?")
+        if(alert) {
         this.users = this.users.filter( user => {
             return user.id != og      
         })
+        }
       },
       editUser: function(user) {
         this.editedUser = user
@@ -81,17 +86,15 @@ export default {
     min-height: calc(100vh - 156px);
   }
  
-  .mainContent p {
+
+  .mainContent > p {
     font-size: 16px;
     line-height: 28px;
     letter-spacing: 1.5px;
     width: 80%;
-    margin: 0 auto;
-  }  
-    .mainContent > p {
     font-weight: 600;
     color: #323337;
-    margin-bottom: 20px;
+    margin: 20px auto;
   }
   .card {
     background:  #e9e9e9;
@@ -117,14 +120,24 @@ export default {
   .cardContent i {
     float: right;
   }
-  .cardContent p {
-    margin: 15px 0;
-    font-size: 40px;
-    width: 100%;
-  }
-  .cardContent p:nth-child(2) {
-    margin-bottom: 30px;
-  }
+  .userTitle p {
+    font-size: 30px;
+    line-height: 28px;
+    letter-spacing: 1.5px;
+    width: 80%;
+    margin: 0 auto 18px;
+  } 
+  .userTitle input {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1.5px;
+    color: #263238;
+    margin: 0 auto 18px;
+    /* border: none; */
+}
+  /* .userTitle input:focus:not([readonly]) {
+    border: none;
+  } */
   .cardContent img {
     -webkit-filter: brightness(80%);
     filter: brightness(80%);
