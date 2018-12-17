@@ -197,9 +197,6 @@ export default {
     }
   }
   .addButton {
-    /* position: fixed;
-    top: 250px;
-    right: 30px; */
     position: relative;
     z-index: 100;
     background:  #546e7a ;
@@ -216,8 +213,14 @@ export default {
   .editButton {
     background:  #c1c1c1 ;
   }
+  .editButton:hover {
+    background:  #a0a0a0 ;
+  }
   .deleteButton {
     background:  #de8080 ;
+  }
+  .deleteButton:hover {
+    background:  #da6161 ;
   }
 
 
