@@ -10,9 +10,7 @@
             </router-link>
           </a>
           <div class="location">
-            <!-- <i class="material-icons prefix">location_searching</i> -->
-            <!-- <i class="material-icons prefix">location_on</i> -->
-            <i class="material-icons prefix">search</i>
+            <i class="material-icons prefix">location_searching</i>
             <span class="imput-field">              
               <input placeholder="Where next?" id="location" type="text" class="validate">
             </span>
@@ -57,7 +55,7 @@ nav ul a:hover {
   background-color: none;
 }
 .topNav {
-  background: #fff;
+  background: #eee;
   height: 60px;
   position: fixed;
   top: 0;
