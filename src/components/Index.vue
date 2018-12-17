@@ -3,35 +3,46 @@
    <Hero />  
 <div class="container mainContent">
     <p>Showaround locals can tailor your activities and give you an insider's view on where to go and what to see</p>
-    <a href="#" id="addBtn" class="addButton btn-floating btn-large halfway-fab" @scroll="scrollFunction">
-      <router-link :to="{ name: 'AddUser' }">
-        <i class="material-icons">add</i>
-      </router-link>
-    </a>
     <div class="row">
       <div class="col s12 m6 l4" v-for="user in users" :key="user.id">
         <div class="card">
           <div class="cardContent">
             <div class="userTitle">
-              <input v-if="user.edit" v-model="user.firstName" placeholder="First name" class="darken-4-text center-align">
-              <p v-else> {{ user.firstName }} </p>
-              <input v-if="user.edit" v-model="user.lastName" class="darken-4-text center-align">
-              <p v-else class="darken-4-text center-align">{{ user.lastName }}</p>
+            <!-- This is for dummy users -->
+              <input v-if="user.edit" v-model="user.first_name" placeholder="First name" class="darken-4-text center-align">
+              <p v-else> {{ user.first_name }} </p>
+              <input v-if="user.edit" v-model="user.last_name" class="darken-4-text center-align">
+              <p v-else class="darken-4-text center-align">{{ user.last_name }}</p>
+              
+            <!-- This is for api users without edit -->
+              <!-- <p class="darken-4-text center-align">{{ user.first_name }}</p>           
+              <p class="darken-4-text center-align">{{ user.last_name }}</p> -->
             </div>
-            <img v-bind:src="user.img" alt="">
+            <!-- <img v-bind:src="user.img" alt=""> -->
+            <img v-bind:src="user.avatar" alt="">
           </div>
           <button v-if="user.edit" class="editButton btn-flat" @click = "user.edit = false;">Ok</button>
           <button v-else class="editButton btn-flat" @click = "user.edit = true;">Edit</button>
           <button class="deleteButton btn-flat" @click="deleteUser(user.id)">Delete</button>
         </div>
       </div>
+      
     </div>
+    <!-- <a href="#" id="addBtn" class="addButton btn-floating btn-large" @scroll="scrollFunction"> -->
+    <a href="#" id="addBtn" class="addButton btn" @scroll="scrollFunction">
+      <router-link :to="{ name: 'AddUser' }">
+        <!-- <i class="material-icons">add</i> -->
+        <span>Add new user</span>
+      </router-link>
+    </a>
+    
   </div>
 </div>
 </template>
 
 <script>
 import Hero from "@/components/Hero"
+import axios from "axios" 
 export default {
   name: 'Index',
   components: {
@@ -39,37 +50,56 @@ export default {
   },
   data () {
     return {
-      users: [
-          // This is just a dummy data
-        { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas", edit: false },
-        { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro", edit: false },
-        { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt", edit: false },
-        { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney", edit: false },
-        { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino", edit: false },
-        { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen", edit: false },       
-        { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver", edit: false },
-         { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson", edit: false },
-        { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider", edit: false }
+      // users: [
+      //     // This is just a dummy data
+      //   { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas", edit: false },
+      //   { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro", edit: false },
+      //   { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt", edit: false },
+      //   { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney", edit: false },
+      //   { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino", edit: false },
+      //   { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen", edit: false },       
+      //   { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver", edit: false },
+      //    { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson", edit: false },
+      //   { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider", edit: false }
 
-      ],
+      // ],
+      users: [],
       editedUser: null
     }
   },
     methods: {
       deleteUser(og) {
         alert("Do you realy want to delete user?")
-        if(alert) {
-        this.users = this.users.filter( user => {
-            return user.id != og      
-        })
+          if(alert) {
+          this.users = this.users.filter( user => {
+              return user.id != og      
+          })
         }
       },
       editUser: function(user) {
         this.editedUser = user
       },
+      // addEdit() {
+      //   this.users.map(function(o) {
+      //     o.edit = false;
+      //     return o
+      //     console.log(this.users)
+      //   })
+      // },
       scrollFunction () {
         console.log(200)
       }
+    },
+    mounted() {
+      let self = this
+      axios.get("https://reqres.in/api/users?per_page=12")
+      .then(function(res) {
+        self.users = res.data.data
+        console.log(self.users)
+      })
+      .catch(function(error) {
+        console.log("Error: ", error);
+      })
     }
   }
 
@@ -82,7 +112,7 @@ export default {
     width: 80%;
     margin: 0 auto;
     padding-top: 30px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
     min-height: calc(100vh - 156px);
   }
  
@@ -115,8 +145,18 @@ export default {
   }
   .cardContent {
     padding: 22px 22px 0;
-    height: 435px;
+    height: 400px; 
   }
+  @media screen and (min-width: 768px) {
+    .cardContent {
+      height: 440px; 
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .cardContent {
+      height: 400px; 
+    }
+  }  
   .cardContent i {
     float: right;
   }
@@ -140,18 +180,36 @@ export default {
   } */
   .cardContent img {
     -webkit-filter: brightness(80%);
-    filter: brightness(80%);
-    width: 180px;
+    filter: brightness(80%);   
+    width: 165px;
+    height: 240px;
   }
-
+  @media screen and (min-width: 768px) {
+    .cardContent img { 
+      width: 240px;
+      height: 300px;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .cardContent img { 
+      width: 170px;
+      height: 240px;
+    }
+  }
   .addButton {
-    position: fixed;
+    /* position: fixed;
     top: 250px;
-    right: 30px;
+    right: 30px; */
+    position: relative;
     z-index: 100;
     background:  #546e7a ;
     transition: ease-in-out 0.2s;
+    margin: 0 auto;
+    right: 0;
   }
+  .addButton a {
+    color: #eee;
+  }  
   .addButton:hover {
     background:  #487e85 ;
   }

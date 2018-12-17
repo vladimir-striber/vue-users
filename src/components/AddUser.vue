@@ -42,7 +42,7 @@ export default {
           this.name = null
           this.warning = null 
         } else {
-          this.warning = "Please enter the users name..."
+          this.warning = "Please enter the users full name!"
         }
         
       }

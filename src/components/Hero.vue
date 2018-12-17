@@ -75,6 +75,7 @@ export default {
 .heroContainer__intro p {  
   text-transform: uppercase;
   text-align: left;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
   margin: 0;
   line-height: 1;
 }

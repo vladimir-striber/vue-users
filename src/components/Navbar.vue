@@ -10,7 +10,9 @@
             </router-link>
           </a>
           <div class="location">
-            <i class="material-icons prefix">location_searching</i>
+            <!-- <i class="material-icons prefix">location_searching</i> -->
+            <!-- <i class="material-icons prefix">location_on</i> -->
+            <i class="material-icons prefix">search</i>
             <span class="imput-field">              
               <input placeholder="Where next?" id="location" type="text" class="validate">
             </span>
