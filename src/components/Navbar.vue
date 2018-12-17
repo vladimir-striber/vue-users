@@ -57,7 +57,7 @@ nav ul a:hover {
   background-color: none;
 }
 .topNav {
-  background: #eee;
+  background: #fff;
   height: 60px;
   position: fixed;
   top: 0;
