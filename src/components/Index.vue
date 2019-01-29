@@ -9,17 +9,17 @@
           <div class="cardContent">
             <div class="userTitle">
             <!-- This is for dummy users -->
-              <input v-if="user.edit" v-model="user.first_name" placeholder="First name" class="darken-4-text center-align">
-              <p v-else> {{ user.first_name }} </p>
-              <input v-if="user.edit" v-model="user.last_name" class="darken-4-text center-align">
-              <p v-else class="darken-4-text center-align">{{ user.last_name }}</p>
+              <input v-if="user.edit" v-model="user.firstName" placeholder="First name" class="darken-4-text center-align">
+              <p v-else> {{ user.firstName }} </p>
+              <input v-if="user.edit" v-model="user.lastName" class="darken-4-text center-align">
+              <p v-else class="darken-4-text center-align">{{ user.lastName }}</p>
               
             <!-- This is for api users without edit -->
               <!-- <p class="darken-4-text center-align">{{ user.first_name }}</p>           
               <p class="darken-4-text center-align">{{ user.last_name }}</p> -->
             </div>
             <!-- <img v-bind:src="user.img" alt=""> -->
-            <img v-bind:src="user.avatar" alt="">
+            <img v-bind:src="user.img" alt="">
           </div>
           <button v-if="user.edit" class="editButton btn-flat" @click = "user.edit = false;">Ok</button>
           <button v-else class="editButton btn-flat" @click = "user.edit = true;">Edit</button>
@@ -50,20 +50,24 @@ export default {
   },
   data () {
     return {
-      // users: [
-      //     // This is just a dummy data
-      //   { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas", edit: false },
-      //   { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro", edit: false },
-      //   { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt", edit: false },
-      //   { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney", edit: false },
-      //   { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino", edit: false },
-      //   { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen", edit: false },       
-      //   { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver", edit: false },
-      //    { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson", edit: false },
-      //   { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider", edit: false }
+      users: [
+          // This is just a dummy data
+        { firstName: "Michael", lastName: "Douglas", id: "1", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzMzOTQ3MF5BMl5BanBnXkFtZTcwOTE0MzY1Mw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Michael Douglas", edit: false },
+        { firstName: "Robert", lastName: "De Niro", id: "2", img: "https://m.media-amazon.com/images/M/MV5BMjAwNDU3MzcyOV5BMl5BanBnXkFtZTcwMjc0MTIxMw@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Robert De Niro", edit: false },
+        { firstName: "Brad", lastName: "Pitt", id: "3", img: "https://m.media-amazon.com/images/M/MV5BMjA1MjE2MTQ2MV5BMl5BanBnXkFtZTcwMjE5MDY0Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Brad Pitt", edit: false },
+        { firstName: "George", lastName: "Clooney", id: "4", img: "https://m.media-amazon.com/images/M/MV5BMjEyMTEyOTQ0MV5BMl5BanBnXkFtZTcwNzU3NTMzNw@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "George Clooney", edit: false },
+        { firstName: "Al", lastName: "Pacino", id: "5", img: "https://m.media-amazon.com/images/M/MV5BMTQzMzg1ODAyNl5BMl5BanBnXkFtZTYwMjAxODQ1._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Al Pacino", edit: false },
+        { firstName: "Clive", lastName: "Owen", id: "6", img: "https://m.media-amazon.com/images/M/MV5BMjA4MzAyOTc5Ml5BMl5BanBnXkFtZTcwOTQ5NzEzMg@@._V1_UY317_CR13,0,214,317_AL_.jpg", alt: "Clive Owen", edit: false },       
+        { firstName: "Sigourney", lastName: "Weaver", id: "8", img: "https://m.media-amazon.com/images/M/MV5BMTk1MTcyNTE3OV5BMl5BanBnXkFtZTcwMTA0MTMyMw@@._V1_UY317_CR12,0,214,317_AL_.jpg", alt: "Sigourney Weaver", edit: false },
+         { firstName: "Owen", lastName: "Wilson", id: "7", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzQ4ODYxMV5BMl5BanBnXkFtZTcwNDAwMTc2NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg", alt: "Owen Wilson", edit: false },
+        { firstName: "Winona", lastName: "Ryder", id: "9", img: "https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg", alt: "Winona Rider", edit: false }
 
-      // ],
-      users: [],
+      ],
+
+      // We need this when calling actual data from api
+
+      // users: [],
+
       editedUser: null
     }
   },
@@ -76,9 +80,9 @@ export default {
           })
         }
       },
-      editUser: function(user) {
-        this.editedUser = user
-      },
+      // editUser: function(user) {
+      //   this.editedUser = user
+      // },
       // addEdit() {
       //   this.users.map(function(o) {
       //     o.edit = false;
@@ -89,18 +93,21 @@ export default {
       scrollFunction () {
         console.log(200)
       }
-    },
-    mounted() {
-      let self = this
-      axios.get("https://reqres.in/api/users?per_page=12")
-      .then(function(res) {
-        self.users = res.data.data
-        console.log(self.users)
-      })
-      .catch(function(error) {
-        console.log("Error: ", error);
-      })
     }
+
+    // This is the way we call reqres api and pull the data 
+
+    // mounted() {
+    //   let self = this;
+    //   axios.get("https://reqres.in/api/users?per_page=12")
+    //   .then(function(res) {
+    //     self.users = res.data.data;
+    //     console.log(self.users)
+    //   })
+    //   .catch(function(error) {
+    //     console.log("Error: ", error);
+    //   })
+    // }
   }
 
 </script>
