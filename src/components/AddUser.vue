@@ -1,7 +1,7 @@
 <template>
 <div class="mainContent container">
   <h2>Create new user</h2>
-  <form @click.prevent="user">
+  <form @submit.prevent="user">
     <div class="createUserInput field title">
       <label for="name">Full name</label>
       <input type="text" name="name" class="validate" v-model="name">
@@ -28,17 +28,19 @@ export default {
     data() {
         return {
           name: null,
-          fullName: [],
+          newUser: [
+            { firstName: "", lastName: "", id: "", img: "", alt: "", edit: "" }
+          ],
           warning: null
         }
     },
     methods: {
       user() {
-        console.log(this.title)
+        console.log(this.newUser)
       },
       addUser() {
         if(this.name){
-          this.fullName.push(this.name)
+          this.newUser.push(this.name)
           this.name = null
           this.warning = null 
         } else {

@@ -35,6 +35,7 @@
         <span>Add new user</span>
       </router-link>
     </a>
+    <button class="addButton btn" @click="countFunction()">You clicked me {{ count }} times</button>
     
   </div>
 </div>
@@ -64,11 +65,12 @@ export default {
 
       ],
 
-      // We need this when calling actual data from api
+      // We need this when we want to call api and render data from it
 
       // users: [],
 
-      editedUser: null
+      editedUser: null,
+      count: 0
     }
   },
     methods: {
@@ -80,18 +82,12 @@ export default {
           })
         }
       },
-      // editUser: function(user) {
-      //   this.editedUser = user
-      // },
-      // addEdit() {
-      //   this.users.map(function(o) {
-      //     o.edit = false;
-      //     return o
-      //     console.log(this.users)
-      //   })
-      // },
+     
       scrollFunction () {
         console.log(200)
+      },
+      countFunction() {
+        this.count++
       }
     }
 
